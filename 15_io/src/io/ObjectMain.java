@@ -1,0 +1,31 @@
+package io;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+//객체를 파일로 넘길때는 serializable(마샬링 작업)로 직렬화 시켜줘야한다.
+//
+public class ObjectMain {
+
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		
+//		PersonDTO dto = new PersonDTO("홍길동", 25, 185.3);
+//		
+//		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("result2.txt"));
+//		oos.writeObject(dto);
+//		oos.close();
+		
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("result2.txt"));
+		PersonDTO dto2 = (PersonDTO) ois.readObject(); //자식 = (자식)부모
+		
+		System.out.println("이름 = " + dto2.getName());
+		System.out.println("나이 = " + dto2.getAge());
+		System.out.println("키 = " + dto2.getHeight());
+		ois.close();
+				
+	}
+}
